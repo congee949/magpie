@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>#728 界面预览 · 9a75954</title>
+<style>:root{color-scheme:light dark;--bg:#f6f6f7;--fg:#1d1d1f;--muted:#6e6e73;--card:#fff;--line:#e5e5ea}
+@media (prefers-color-scheme:dark){:root{--bg:#111113;--fg:#f2f2f4;--muted:#9a9aa0;--card:#1c1c1f;--line:#2c2c30}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:28px 16px 60px}h1{font-size:20px;margin:0 0 4px}.m{color:var(--muted);font-size:13px;margin:0 0 20px}
+video,img{display:block;width:100%;border-radius:10px;border:1px solid var(--line);background:var(--card)}figure{margin:0 0 28px}figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+a{color:inherit}</style>
+<main><h1>#728 界面预览</h1><p class="m">commit 9a75954 · <a href="https://github.com/yetone/magpie/pull/728">回到 PR</a> · diff 给 magpie 新增了一个 Agent：Mister Morph（morph）。Agent 列表和菜单栏快捷面板里会多出它的一行（自带图标、按 ~/.morph 或 $MISTER_MORPH_CONFIG 检测），行内的模型菜单可选 magpie 的模型并把它写入 ~/.morph/config.yaml 指向网关，另有一个 effort 项；同时 morph 被加入 NO_PICKER。</p>
+<figure><video src="preview.mp4" controls autoplay muted playsinline poster="poster.png"></video><figcaption>红线是鼠标走过的轨迹，红色圆环是一次点击；底部文字是这一步在做什么。空格暂停，← → 逐段查看。</figcaption></figure>
+<figure><img src="01-agents-collapsed.png" alt="Agent 页默认显示的列表"><figcaption>Agent 列表里的 Mister Morph · Agent 页默认显示的列表</figcaption></figure>
+<figure><img src="02-agents-expanded.png" alt="展开后的 Agent 列表"><figcaption>Agent 列表里的 Mister Morph · 展开后的 Agent 列表</figcaption></figure>
+<figure><img src="03-panel-agents.png" alt="菜单栏快捷面板的 Agent 页"><figcaption>快捷面板里的 Agent 列表 · 菜单栏快捷面板的 Agent 页</figcaption></figure>
+<figure><img src="04-panel-expanded.png" alt="展开后的快捷面板列表"><figcaption>快捷面板里的 Agent 列表 · 展开后的快捷面板列表</figcaption></figure>
+</main></html>
