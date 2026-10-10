@@ -257,16 +257,18 @@
   // the reasoning was written before the stream showed any, OpenAI's
   // encrypted and its summary sent when done, and counting it read
   // gpt-6.1-sol at 163 tok/s. The reply's reasoning is its served try's.
+  // No answer text: all of its output counts from the first content.
   // A reply held back and let go in a burst at its end tells no speed
   // (usage.DecodeOf, John on Discord: Kimi Code at 2,237 tok/s): its
   // content came in under a quarter of its window (flow), or its answer
   // at over 20 times the pace its reasoning came before its first text.
   function decodeOf(r, ms, ttft, firstText, flow = r.flow) {
-    const think = reasoningOf(r), n = think > 0 ? r.out - think : r.out, from = think > 0 ? firstText : ttft;
+    const reasoned = reasoningOf(r), answer = reasoned > 0 && firstText > 0;
+    const n = answer ? r.out - reasoned : r.out, from = answer ? firstText : ttft;
     const w = ms - from;
     if (!(n > 0 && ttft > 0 && from > 0 && w >= 100 && n * 1000 <= 10000 * w)) return null;
     if (flow > 0 && flow * 4 < w) return null;
-    if (think > 0 && n * (firstText - ttft) > 20 * think * w) return null;
+    if (answer && n * (firstText - ttft) > 20 * reasoned * w) return null;
     return { n, w };
   }
   const reasoningOf = (r) => r.reasoning ?? (r.usage?.length ? r.usage[r.usage.length - 1].reasoning || 0 : 0);

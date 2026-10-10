@@ -351,8 +351,11 @@ func DecodeWindow(out int, ms, ttft int64) int64 {
 // written before the first content, over time the window from it doesn't
 // hold, and counting them read a 2,000-token think and a 200-token answer
 // in 1.5 s as 1,467 tok/s. Its time goes to the wait before the answer.
-// One with reasoning and no text (all tool calls) tells no speed. The
-// window is DecodeWindow's: 0 for a reply that tells none.
+// One with reasoning and no answer text still has a speed: every output
+// token, reasoning included, from its first streamed content (a reasoning
+// summary or a tool call). Reasoning that finished before that byte is
+// still in the count, so the number can run high; a burst is still none.
+// The window is DecodeWindow's: 0 for a reply that tells none.
 //
 // A reply its vendor held back and let go in a burst at its end tells
 // none either (John on Discord: Kimi Code answering OpenCode read 1,367,
@@ -377,7 +380,11 @@ func DecodeWindow(out int, ms, ttft int64) int64 {
 //     streams comes at the pace its answer does.
 func DecodeOf(out, reasoning int, ms, ttft, firstText, flow int64) (tokens int, w int64) {
 	start := ttft
-	if reasoning > 0 {
+	// An answer is timed alone, from its first text. No answer text: the
+	// streamed content is the reasoning summary or the tool call, so the
+	// whole output is timed from the first content.
+	answer := reasoning > 0 && firstText > 0
+	if answer {
 		out, start = out-reasoning, firstText
 	}
 	if ttft <= 0 {
@@ -389,7 +396,7 @@ func DecodeOf(out, reasoning int, ms, ttft, firstText, flow int64) (tokens int, 
 	if flow > 0 && flow*HeldShare < w {
 		return 0, 0
 	}
-	if reasoning > 0 && int64(out)*(firstText-ttft) > ThinkPace*int64(reasoning)*w {
+	if answer && int64(out)*(firstText-ttft) > ThinkPace*int64(reasoning)*w {
 		return 0, 0
 	}
 	return out, w

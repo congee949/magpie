@@ -4,8 +4,9 @@
 // tokens, written before its first content at 14 s, and a 200-token answer
 // over the 1.5 s after counted 2200 tokens in 1.5 s, 1,467 tok/s; it is 200
 // in 1.5 s, 133. An older route without its own reasoning count takes its
-// served try's; a reply that reasoned and wrote only tool calls tells no
-// speed; one that didn't reason is timed as before. The Routing page's rows,
+// served try's; a reply that reasoned and wrote no answer text counts all
+// of its output from the first content; one that didn't reason is timed as
+// before. The Routing page's rows,
 // a session's average and the Usage page's rows and their tooltip all say
 // it, in English, Chinese, Japanese and German; no backend, the API is faked.
 const assert = require("node:assert/strict");
@@ -23,7 +24,7 @@ const at = (i) => new Date(now.getTime() - (i + 1) * 60e3).toISOString();
 const timing = [
   [2200, 2000, 0, 15500, 14000, 14000], // the turn: 200 in 1.5 s, 133 tok/s
   [1300, 0, 1000, 9000, 6000, 6000],    // an older route: 300 in 3 s, 100 tok/s
-  [1500, 1400, 0, 9000, 8000, 0],       // reasoning, then tool calls only: none
+  [260, 80, 0, 9000, 8000, 0],         // reasoning, no answer text: 260 in 1 s
   [500, 0, 0, 7000, 2000, 2000],        // no reasoning: 500 in 5 s, 100 tok/s
 ];
 const routes = timing.map(([out, reasoning, usageReasoning, ms, ttft, firstText], i) => ({
@@ -97,7 +98,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       const speedOf = async (i) => (await reqs.nth(i).locator(".speed").count()) ? (await reqs.nth(i).locator(".speed .v").textContent()).trim() : "";
       assert.equal(await speedOf(0), w.s(133), "the turn's answer, not 1,467");
       assert.equal(await speedOf(1), w.s(100), "an older route's reasoning is its try's");
-      assert.equal(await speedOf(2), "", "tool calls after reasoning tell no speed");
+      assert.equal(await speedOf(2), w.s(260), "no answer text: all output after the first content");
       assert.equal(await speedOf(3), w.s(100), "no reasoning: as before");
       assert.match(await reqs.nth(0).locator(".speed").getAttribute("title"), w.rule);
       await reqs.nth(0).click();
@@ -107,8 +108,8 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       await page.locator(".rt-group-by button").nth(1).click();
       const group = page.locator("button.rt-session").first();
       await group.waitFor();
-      // 1000 answer tokens over 9.5 s of answers, not 4500 over them
-      assert.equal((await group.locator(".speed .v").textContent()).trim(), w.s(105));
+      // 1,260 tokens over 10.5 s, the no-answer row included
+      assert.equal((await group.locator(".speed .v").textContent()).trim(), w.s(120));
       assert.match(await group.locator(".speed").getAttribute("title"), w.rule);
 
       // the Usage page's requests: each row, its tooltip, and the period's
@@ -124,7 +125,7 @@ for (const engine of (process.env.BROWSER ? [process.env.BROWSER] : ["chromium",
       assert.equal((await cell(0).textContent()).trim(), w.s(133));
       assert.match(await cell(0).getAttribute("title"), w.note);
       assert.equal((await cell(1).textContent()).trim(), w.s(100));
-      assert.equal((await cell(2).textContent()).trim(), "—");
+      assert.equal((await cell(2).textContent()).trim(), w.s(260));
       assert.equal((await cell(3).textContent()).trim(), w.s(100));
       const kpi = page.locator("#ledKpi .blk").nth(4);
       assert.equal((await kpi.locator(".v").textContent()).trim(), w.s(105));

@@ -16248,17 +16248,18 @@ const LED_COLS = [
 // the tokens a reply was seen to write and the ms it took, as
 // usage.DecodeOf and routing.js's decodeOf tell them: one that reasoned
 // counts its answer from its first text, its reasoning written before
-// the stream showed any (tony on Discord); null when it tells no speed.
+// the stream showed any (tony on Discord). No answer text: all output
+// counts from the first content. Null when it tells no speed.
 // A reply held back and let go in a burst at its end tells none (John on
 // Discord): its content came in under a quarter of its window (flow_ms),
 // or its answer at over 20 times the pace its reasoning came before it
 const ledDecode = (r) => {
   if (ledFailed_(r) || !(r.ttft_ms > 0)) return null;
-  const think = r.reasoning > 0, n = think ? r.out - r.reasoning : r.out, from = think ? r.first_text_ms : r.ttft_ms;
+  const answer = r.reasoning > 0 && r.first_text_ms > 0, n = answer ? r.out - r.reasoning : r.out, from = answer ? r.first_text_ms : r.ttft_ms;
   const w = r.ms - from;
   if (!(n > 0 && from > 0 && w >= 100 && n * 1000 <= 10000 * w)) return null;
   if (r.flow_ms > 0 && r.flow_ms * 4 < w) return null;
-  if (think && n * (r.first_text_ms - r.ttft_ms) > 20 * r.reasoning * w) return null;
+  if (answer && n * (r.first_text_ms - r.ttft_ms) > 20 * r.reasoning * w) return null;
   return { n, w };
 };
 // how fast a reply wrote, in tokens a second: 0 when it can't tell
@@ -16530,7 +16531,8 @@ function renderLedger() {
     // how fast it wrote once it began, as CC Switch's log has it (#860)
     const v = ledRowSpeed(r);
     td(v ? t("{n} tok/s", { n: ledNum(Math.round(v)) }) : "—", "n speed" + (v ? "" : " faint"),
-      v ? (r.reasoning > 0 ? t("{n} answer tokens in {ms} after the first text, the {r} reasoning tokens before it left out", { n: ledNum(ledDecode(r).n), ms: ledTook(ledDecode(r).w), r: ledNum(r.reasoning) })
+      v ? (r.reasoning > 0 && r.first_text_ms > 0 ? t("{n} answer tokens in {ms} after the first text, the {r} reasoning tokens before it left out", { n: ledNum(ledDecode(r).n), ms: ledTook(ledDecode(r).w), r: ledNum(r.reasoning) })
+        : r.reasoning > 0 ? t("{n} output tokens in {ms} after the first content, reasoning included: no answer text", { n: ledNum(ledDecode(r).n), ms: ledTook(ledDecode(r).w) })
         : t("{n} output tokens in {ms} after the first", { n: ledNum(r.out), ms: ledTook(r.ms - r.ttft_ms) })) + " · " + t("TTFT {ms}", { ms: ledTook(r.ttft_ms) })
         : r.ttft_ms || untimed || ledFailed_(r) ? "" : t("Not streamed: no first token to time a speed from"));
     const st = el("span", "st");

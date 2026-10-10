@@ -208,9 +208,9 @@ func TestBurstTellsNoSpeed(t *testing.T) {
 // over the 1.5 s after counted 2200 tokens in 1.5 s, 1,467 tok/s; it's 200
 // in 1.5 s, 133. Two such subagents running at once are each their own
 // window, summed, not the wall clock's. A reply that reasoned and wrote
-// only tool calls has no first text and tells no speed; one that didn't
-// reason, or wasn't streamed, is timed as before. The summary, ledger rows
-// and the timeline's parts agree.
+// no answer text counts all of its output from the first content, 1,500
+// tokens in that 1 s. One that didn't reason, or wasn't streamed, is
+// timed as before. The summary, ledger rows and the timeline's parts agree.
 func TestReasoningReplyTimedByItsAnswer(t *testing.T) {
 	now := time.Date(2026, 10, 6, 15, 30, 0, 0, time.UTC)
 	at := now.Add(-time.Hour)
@@ -221,14 +221,14 @@ func TestReasoningReplyTimedByItsAnswer(t *testing.T) {
 		codex(2200, 2000, 15500, 14000, 14000), // the turn: 200 in 1.5 s
 		codex(2200, 2000, 15500, 13990, 14000), // a summary 10 ms before the text: the same
 		codex(1300, 1000, 9000, 6000, 6000),    // a subagent at once: 300 in 3 s
-		codex(1500, 1400, 9000, 8000, 0),       // reasoning, then tool calls only: no speed
+		codex(1500, 1400, 9000, 8000, 0),       // reasoning, no answer text: 1500 in 1 s
 		codex(900, 1000, 9000, 6000, 6000),     // reasoning over output: none
 		{Time: at, Provider: "codex", Model: "gpt-6.1-sol", Output: 500, Millis: 7000, TTFT: 2000, Status: 200},     // no reasoning: 500 in 5 s
 		{Time: at, Provider: "codex", Model: "gpt-6.1-sol", Output: 900, Reasoning: 300, Millis: 7000, Status: 200}, // not streamed
 	}
-	const ms, out = 1500 + 1500 + 3000 + 5000, 200 + 200 + 300 + 500
+	const ms, out = 1500 + 1500 + 3000 + 1000 + 5000, 200 + 200 + 300 + 1500 + 500
 	m := summarize(Today, now, recs).Models[0]
-	if m.Timed != 6 || m.DecodeMs != ms || m.DecodeOut != out || m.Speed() != 109.0909090909091 {
+	if m.Timed != 6 || m.DecodeMs != ms || m.DecodeOut != out || m.Speed() != 225 {
 		t.Fatalf("model: %+v, %v tok/s", m.Totals, m.Speed())
 	}
 	var rows Totals
@@ -260,13 +260,24 @@ func TestReasoningReplyTimedByItsAnswer(t *testing.T) {
 		w int64
 	}{
 		{recs[0], 200, 1500},
-		{recs[3], 0, 0},
+		{recs[3], 1500, 1000},
 		{recs[5], 500, 5000},
 		{recs[6], 0, 0},
 	} {
 		if n, w := c.r.Decode(); n != c.n || w != c.w {
 			t.Errorf("Decode(%+v) = %d, %d; want %d, %d", c.r, n, w, c.n, c.w)
 		}
+	}
+}
+
+func TestReasoningWithoutTextDropsABurst(t *testing.T) {
+	// 35 ms after the first content is a dump, not a writing speed.
+	if n, w := DecodeOf(130, 37, 2656, 2621, 0, 0); w != 0 {
+		t.Fatalf("burst = %d tokens in %d ms", n, w)
+	}
+	// a held reply still tells none, even with no answer text
+	if _, w := DecodeOf(1000, 900, 10000, 2000, 0, 100); w != 0 {
+		t.Fatal("held reply told a speed")
 	}
 }
 
