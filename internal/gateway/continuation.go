@@ -269,6 +269,7 @@ func (s *Server) streamTranslated(w http.ResponseWriter, r *http.Request, p prov
 	// try's reasoning was found stuck in a loop before it had, and it is
 	// let go to ask again (loopReasks)
 	var spoke, relooped bool
+	var summaryUpstream bool
 	reasks := 0
 	if h, ok := w.(*holdWriter); ok {
 		h.onLoop(func(t loopTrip) bool {
@@ -290,6 +291,15 @@ func (s *Server) streamTranslated(w http.ResponseWriter, r *http.Request, p prov
 		}
 		spoke = spoke || saysSomething(ev)
 		switch ev.Kind {
+		case KThink, KSealed:
+			if ev.Kind == KThink && !summaryUpstream {
+				break
+			}
+			if h, ok := w.(*holdWriter); ok {
+				h.mu.Lock()
+				h.first.hidden = true
+				h.mu.Unlock()
+			}
 		case KError:
 			if ev.Code == "" && cont.possible() && !inGroupTry(r.Context()) {
 				// held while the reply may yet go on; sent when it can't
@@ -352,6 +362,7 @@ func (s *Server) streamTranslated(w http.ResponseWriter, r *http.Request, p prov
 		}
 		if err == nil {
 			u.RequestID = requestID(res.Header)
+			summaryUpstream = actual == provider.Responses || actual == provider.Gemini || actual == provider.CodeAssist
 			empty = emptyFails(actual)
 		}
 		if err == nil && res.StatusCode >= 400 {

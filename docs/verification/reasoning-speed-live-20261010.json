@@ -1,0 +1,795 @@
+[
+  {
+    "sample": "live-private/claude-claude-haiku-5-5-tool.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "tool",
+    "status": 404,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 159,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 404,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "early isolation setup",
+    "channel_timing": {}
+  },
+  {
+    "sample": "live-private/codex-gpt-6.1-sol-tool.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "tool",
+    "status": 404,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 115,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 404,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "early isolation setup",
+    "channel_timing": {}
+  },
+  {
+    "sample": "live-private/codex-gpt-6.1-sol-answer.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "answer",
+    "status": 404,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 111,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 404,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "early isolation setup",
+    "channel_timing": {}
+  },
+  {
+    "sample": "live-private/claude-claude-haiku-5-5-answer.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "answer",
+    "status": 404,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 117,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 404,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "early isolation setup",
+    "channel_timing": {}
+  },
+  {
+    "sample": "live-private/workbuddy-deepseek-v4.1-flash-answer.json",
+    "model": "workbuddy/deepseek-v4.1-flash",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 57,
+      "out": 98,
+      "reasoning": 74,
+      "ms": 2213,
+      "ttft_ms": 1546,
+      "first_text_ms": 1748,
+      "first_reasoning_ms": 1546,
+      "flow_ms": 117,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 24,
+    "decode_ms": 465,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 74,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 23,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 74,
+        "first_ms": 1547,
+        "last_ms": 1749
+      },
+      "response.output_text.delta": {
+        "events": 23,
+        "first_ms": 1749,
+        "last_ms": 1844
+      }
+    }
+  },
+  {
+    "sample": "live-private/workbuddy-deepseek-v4.1-flash-tool.json",
+    "model": "workbuddy/deepseek-v4.1-flash",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 339,
+      "out": 76,
+      "reasoning": 37,
+      "ms": 7518,
+      "ttft_ms": 6787,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 6787,
+      "flow_ms": 187,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 76,
+    "decode_ms": 731,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 37,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.function_call_arguments.delta": 8,
+      "response.function_call_arguments.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 37,
+        "first_ms": 6789,
+        "last_ms": 7002
+      },
+      "response.function_call_arguments.delta": {
+        "events": 8,
+        "first_ms": 7002,
+        "last_ms": 7026
+      }
+    }
+  },
+  {
+    "sample": "live-private-round2/claude-claude-haiku-5-5-tool.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 289,
+      "reasoning": 174,
+      "ms": 5605,
+      "ttft_ms": 5572,
+      "first_text_ms": 5576,
+      "first_reasoning_ms": 0,
+      "flow_ms": 2,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 18,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 27,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 18,
+        "first_ms": 5572,
+        "last_ms": 5574
+      },
+      "response.output_text.delta": {
+        "events": 27,
+        "first_ms": 5577,
+        "last_ms": 5579
+      }
+    }
+  },
+  {
+    "sample": "live-private-round2/codex-gpt-6.1-sol-tool.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "tool",
+    "status": 529,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 6173,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 529,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {}
+  },
+  {
+    "sample": "live-private-round2/codex-gpt-6.1-sol-answer.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 403,
+      "out": 60,
+      "reasoning": 29,
+      "ms": 16932,
+      "ttft_ms": 15885,
+      "first_text_ms": 15885,
+      "first_reasoning_ms": 0,
+      "flow_ms": 918,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 31,
+    "decode_ms": 1047,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 1,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 25,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 1,
+        "first_ms": 15894,
+        "last_ms": 15894
+      },
+      "response.output_text.delta": {
+        "events": 25,
+        "first_ms": 15894,
+        "last_ms": 16796
+      }
+    }
+  },
+  {
+    "sample": "live-private-round2/claude-claude-haiku-5-5-answer.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 137,
+      "reasoning": 88,
+      "ms": 3940,
+      "ttft_ms": 3873,
+      "first_text_ms": 3876,
+      "first_reasoning_ms": 0,
+      "flow_ms": 1,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 8,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 9,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 8,
+        "first_ms": 3874,
+        "last_ms": 3874
+      },
+      "response.output_text.delta": {
+        "events": 9,
+        "first_ms": 3876,
+        "last_ms": 3877
+      }
+    }
+  },
+  {
+    "sample": "live-private-final/claude-claude-haiku-5-5-tool.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 350,
+      "reasoning": 180,
+      "ms": 6567,
+      "ttft_ms": 6539,
+      "first_text_ms": 6543,
+      "first_reasoning_ms": 0,
+      "flow_ms": 1,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 28,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 40,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 28,
+        "first_ms": 6540,
+        "last_ms": 6542
+      },
+      "response.output_text.delta": {
+        "events": 40,
+        "first_ms": 6544,
+        "last_ms": 6545
+      }
+    }
+  },
+  {
+    "sample": "live-private-final/codex-gpt-6.1-sol-tool.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 4298,
+      "out": 44,
+      "reasoning": 23,
+      "ms": 17367,
+      "ttft_ms": 17175,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 133,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.output_item.done": 2,
+      "response.function_call_arguments.delta": 6,
+      "response.function_call_arguments.done": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.function_call_arguments.delta": {
+        "events": 6,
+        "first_ms": 17176,
+        "last_ms": 17283
+      }
+    }
+  },
+  {
+    "sample": "live-private-final/codex-gpt-6.1-sol-answer.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 403,
+      "out": 77,
+      "reasoning": 36,
+      "ms": 19075,
+      "ttft_ms": 17331,
+      "first_text_ms": 17489,
+      "first_reasoning_ms": 0,
+      "flow_ms": 1385,
+      "status": 200,
+      "reasoning_hidden": true
+    },
+    "decode_tokens": 41,
+    "decode_ms": 1586,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 1,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 35,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 1,
+        "first_ms": 17332,
+        "last_ms": 17332
+      },
+      "response.output_text.delta": {
+        "events": 35,
+        "first_ms": 17490,
+        "last_ms": 18951
+      }
+    }
+  },
+  {
+    "sample": "live-private-final/claude-claude-haiku-5-5-answer.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 132,
+      "reasoning": 94,
+      "ms": 3530,
+      "ttft_ms": 3507,
+      "first_text_ms": 3510,
+      "first_reasoning_ms": 0,
+      "flow_ms": 1,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 5,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 6,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "original revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 5,
+        "first_ms": 3508,
+        "last_ms": 3509
+      },
+      "response.output_text.delta": {
+        "events": 6,
+        "first_ms": 3510,
+        "last_ms": 3511
+      }
+    }
+  },
+  {
+    "sample": "live-private-verified/claude-claude-haiku-5-5-tool.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 6,
+      "reasoning": 0,
+      "ms": 12879,
+      "ttft_ms": 5915,
+      "first_text_ms": 5931,
+      "first_reasoning_ms": 0,
+      "flow_ms": 7627,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 6,
+    "decode_ms": 6964,
+    "event_counts": {
+      "response.created": 2,
+      "response.in_progress": 2,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 18,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 1,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 522,
+      "response.failed": 1
+    },
+    "stream_error": true,
+    "phase": "supplement revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 18,
+        "first_ms": 5916,
+        "last_ms": 5916
+      },
+      "response.output_text.delta": {
+        "events": 522,
+        "first_ms": 5932,
+        "last_ms": 12879
+      }
+    },
+    "speed_eligible": false
+  },
+  {
+    "sample": "live-private-verified/codex-gpt-6.1-sol-tool.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "tool",
+    "status": 200,
+    "record": {
+      "in": 714,
+      "out": 19,
+      "reasoning": 0,
+      "ms": 12774,
+      "ttft_ms": 12452,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 273,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 19,
+    "decode_ms": 322,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 1,
+      "response.function_call_arguments.delta": 6,
+      "response.function_call_arguments.done": 1,
+      "response.output_item.done": 1
+    },
+    "stream_error": false,
+    "phase": "supplement revision",
+    "channel_timing": {
+      "response.function_call_arguments.delta": {
+        "events": 6,
+        "first_ms": 12452,
+        "last_ms": 12672
+      }
+    }
+  },
+  {
+    "sample": "live-private-verified/codex-gpt-6.1-sol-answer.json",
+    "model": "codex/gpt-6.1-sol",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 403,
+      "out": 78,
+      "reasoning": 37,
+      "ms": 13545,
+      "ttft_ms": 12076,
+      "first_text_ms": 12113,
+      "first_reasoning_ms": 0,
+      "flow_ms": 1208,
+      "status": 200,
+      "reasoning_hidden": true
+    },
+    "decode_tokens": 41,
+    "decode_ms": 1432,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 1,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 35,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "supplement revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 1,
+        "first_ms": 12079,
+        "last_ms": 12079
+      },
+      "response.output_text.delta": {
+        "events": 35,
+        "first_ms": 12116,
+        "last_ms": 13381
+      }
+    }
+  },
+  {
+    "sample": "live-private-verified/claude-claude-haiku-5-5-answer.json",
+    "model": "claude/claude-haiku-5-5",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 2,
+      "out": 87,
+      "reasoning": 0,
+      "ms": 4146,
+      "ttft_ms": 3596,
+      "first_text_ms": 3596,
+      "first_reasoning_ms": 0,
+      "flow_ms": 308,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 87,
+    "decode_ms": 550,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 1,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 16,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.output_item.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "supplement revision",
+    "channel_timing": {
+      "response.output_text.delta": {
+        "events": 16,
+        "first_ms": 3598,
+        "last_ms": 4122
+      }
+    }
+  },
+  {
+    "sample": "live-private-verified/workbuddy-deepseek-v4.1-flash-answer.json",
+    "model": "workbuddy/deepseek-v4.1-flash",
+    "kind": "answer",
+    "status": 200,
+    "record": {
+      "in": 57,
+      "out": 108,
+      "reasoning": 75,
+      "ms": 1919,
+      "ttft_ms": 1205,
+      "first_text_ms": 1564,
+      "first_reasoning_ms": 1205,
+      "flow_ms": 38,
+      "status": 200,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {
+      "response.created": 1,
+      "response.in_progress": 1,
+      "response.output_item.added": 2,
+      "response.reasoning_summary_part.added": 1,
+      "response.reasoning_summary_text.delta": 75,
+      "response.reasoning_summary_text.done": 1,
+      "response.reasoning_summary_part.done": 1,
+      "response.output_item.done": 2,
+      "response.content_part.added": 1,
+      "response.output_text.delta": 32,
+      "response.output_text.done": 1,
+      "response.content_part.done": 1,
+      "response.completed": 1
+    },
+    "stream_error": false,
+    "phase": "supplement revision",
+    "channel_timing": {
+      "response.reasoning_summary_text.delta": {
+        "events": 75,
+        "first_ms": 1206,
+        "last_ms": 1566
+      },
+      "response.output_text.delta": {
+        "events": 32,
+        "first_ms": 1566,
+        "last_ms": 1597
+      }
+    }
+  },
+  {
+    "sample": "live-private-verified/workbuddy-deepseek-v4.1-flash-tool.json",
+    "model": "workbuddy/deepseek-v4.1-flash",
+    "kind": "tool",
+    "status": 400,
+    "record": {
+      "in": 0,
+      "out": 0,
+      "reasoning": 0,
+      "ms": 3399,
+      "ttft_ms": 0,
+      "first_text_ms": 0,
+      "first_reasoning_ms": 0,
+      "flow_ms": 0,
+      "status": 400,
+      "reasoning_hidden": 0
+    },
+    "decode_tokens": 0,
+    "decode_ms": 0,
+    "event_counts": {},
+    "stream_error": false,
+    "phase": "supplement revision",
+    "channel_timing": {}
+  }
+]
